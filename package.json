@@ -1,6 +1,6 @@
 {
   "name": "util-pusher-x",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple pusher/concatenator utility.",
   "homepage": "https://github.com/Xotic750/util-pusher-x",
   "author": {
@@ -51,7 +51,11 @@
   "bugs": {
     "url": "https://github.com/Xotic750/util-pusher-x/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "has-boxed-string-x": "^2.1.0",
+    "is-primitive-x": "^1.0.0",
+    "is-string": "^1.0.4"
+  },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",

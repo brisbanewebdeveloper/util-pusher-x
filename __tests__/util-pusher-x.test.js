@@ -22,4 +22,17 @@ describe('pusher', function() {
     expect(pusher([0, 1, 2, 3, 4], 3, target)).toBe(target);
     expect(target).toStrictEqual([1, 2, 3, 4]);
   });
+
+  it('target should be a new empty array if not array like', function() {
+    expect.assertions(4);
+    expect(pusher(1)).toStrictEqual([]);
+    expect(pusher(true)).toStrictEqual([]);
+    expect(pusher(null)).toStrictEqual([]);
+    expect(pusher()).toStrictEqual([]);
+  });
+
+  it('strings', function() {
+    expect.assertions(1);
+    expect(pusher('123')).toStrictEqual(['1', '2', '3']);
+  });
 });

@@ -1,4 +1,13 @@
-// eslint-disable jsdoc/no-undefined-types
+import isPrimitive from 'is-primitive-x';
+import isString from 'is-string';
+var EMPTY_STRING = '';
+var split = EMPTY_STRING.split;
+var splitter = [EMPTY_STRING];
+
+var getIterable = function getIterable(arrayLike) {
+  // noinspection JSUnresolvedFunction
+  return isString(arrayLike) ? split.apply(arrayLike, splitter) : arrayLike;
+}; // eslint-disable jsdoc/no-undefined-types
 // noinspection JSCommentMatchesSignature
 
 /**
@@ -10,13 +19,20 @@
  * @returns {*} The target array.
  */
 // eslint-enable jsdoc/no-undefined-types
-var pusher = function pusher(arrayLike, from) {
-  var len = arrayLike.length;
-  /* eslint-disable-next-line prefer-rest-params */
 
+
+var pusher = function pusher(arrayLike, from) {
+  /* eslint-disable-next-line prefer-rest-params */
   var target = arguments.length > 2 ? arguments[2] : [];
 
-  for (var i = from || 0; i < len; i += 1) {
+  if (typeof arrayLike !== 'string' && isPrimitive(arrayLike)) {
+    return target;
+  }
+
+  var iterable = getIterable(arrayLike);
+  var length = iterable.length;
+
+  for (var i = from || 0; i < length; i += 1) {
     target[target.length] = arrayLike[i];
   }
 
