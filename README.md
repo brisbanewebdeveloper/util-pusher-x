@@ -59,8 +59,8 @@ This pushes or concatenates into a new or existing array.
 | Param       | Type                   | Description            |
 | ----------- | -----------------------| ---------------------- |
 | arrayLike   | <code>ArrayLike</code> | The source.            |
-| [from]      | <code>\*</code>        | The from source index. |
-| [target]    | <code>\*</code>        | The target array.      |
+| [from]      | <code>number</code>    | The from source index. |
+| [target]    | <code>\Array</code>    | The target array.      |
 
 **Example**
 
