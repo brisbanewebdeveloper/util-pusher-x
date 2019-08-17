@@ -5,6 +5,7 @@ import hasBoxed from 'has-boxed-string-x';
 const EMPTY_STRING = '';
 const {split} = EMPTY_STRING;
 const splitter = [EMPTY_STRING];
+const {max} = Math;
 
 const getIterable = function getIterable(arrayLike) {
   // noinspection JSUnresolvedFunction
@@ -32,7 +33,7 @@ const pusher = function pusher(arrayLike, from) {
 
   const iterable = getIterable(arrayLike);
   const {length} = iterable;
-  for (let i = from || 0; i < length; i += 1) {
+  for (let i = max(0, from) || 0; i < length; i += 1) {
     target[target.length] = arrayLike[i];
   }
 

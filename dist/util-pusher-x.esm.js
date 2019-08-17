@@ -1,12 +1,14 @@
 import isPrimitive from 'is-primitive-x';
 import isString from 'is-string';
+import hasBoxed from 'has-boxed-string-x';
 var EMPTY_STRING = '';
 var split = EMPTY_STRING.split;
 var splitter = [EMPTY_STRING];
+var max = Math.max;
 
 var getIterable = function getIterable(arrayLike) {
   // noinspection JSUnresolvedFunction
-  return isString(arrayLike) ? split.apply(arrayLike, splitter) : arrayLike;
+  return hasBoxed && isString(arrayLike) ? split.apply(arrayLike, splitter) : arrayLike;
 }; // eslint-disable jsdoc/no-undefined-types
 // noinspection JSCommentMatchesSignature
 
@@ -32,7 +34,7 @@ var pusher = function pusher(arrayLike, from) {
   var iterable = getIterable(arrayLike);
   var length = iterable.length;
 
-  for (var i = from || 0; i < length; i += 1) {
+  for (var i = max(0, from) || 0; i < length; i += 1) {
     target[target.length] = arrayLike[i];
   }
 

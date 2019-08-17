@@ -2,11 +2,11 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2019-present",
-  "date": "2019-08-16T19:04:18.315Z",
+  "date": "2019-08-17T17:50:12.490Z",
   "describe": "",
   "description": "A simple pusher/concatenator utility.",
   "file": "util-pusher-x.js",
-  "hash": "fe0db7b756ac0c681754",
+  "hash": "83aa5ed10e3ac6b72185",
   "license": "MIT",
   "version": "1.0.1"
 }
@@ -206,16 +206,34 @@ var isPrimitive = function isPrimitive(val) {
 var is_string = __webpack_require__(0);
 var is_string_default = /*#__PURE__*/__webpack_require__.n(is_string);
 
+// CONCATENATED MODULE: ./node_modules/has-boxed-string-x/dist/has-boxed-string-x.esm.js
+var string = 'a';
+var boxedString = {}.constructor(string);
+/**
+ * Check failure of by-index access of string characters (IE < 9)
+ * and failure of `0 in boxedString` (Rhino).
+ *
+ * `true` if no failure; otherwise `false`.
+ *
+ * @type boolean
+ */
+
+var hasBoxed = boxedString[0] === string && 0 in boxedString;
+/* harmony default export */ var has_boxed_string_x_esm = (hasBoxed);
+
+
 // CONCATENATED MODULE: ./dist/util-pusher-x.esm.js
+
 
 
 var EMPTY_STRING = '';
 var split = EMPTY_STRING.split;
 var splitter = [EMPTY_STRING];
+var max = Math.max;
 
 var util_pusher_x_esm_getIterable = function getIterable(arrayLike) {
   // noinspection JSUnresolvedFunction
-  return is_string_default()(arrayLike) ? split.apply(arrayLike, splitter) : arrayLike;
+  return has_boxed_string_x_esm && is_string_default()(arrayLike) ? split.apply(arrayLike, splitter) : arrayLike;
 }; // eslint-disable jsdoc/no-undefined-types
 // noinspection JSCommentMatchesSignature
 
@@ -241,7 +259,7 @@ var util_pusher_x_esm_pusher = function pusher(arrayLike, from) {
   var iterable = util_pusher_x_esm_getIterable(arrayLike);
   var length = iterable.length;
 
-  for (var i = from || 0; i < length; i += 1) {
+  for (var i = max(0, from) || 0; i < length; i += 1) {
     target[target.length] = arrayLike[i];
   }
 
