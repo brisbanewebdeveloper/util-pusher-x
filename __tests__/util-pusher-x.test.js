@@ -1,9 +1,25 @@
-import pusher from '../src/util-pusher-x';
+import pusher, {stringSplit, $split, getIterable} from '../src/util-pusher-x';
 
 describe('pusher', function() {
   it('is a function', function() {
     expect.assertions(1);
     expect(typeof pusher).toBe('function');
+  });
+
+  it('has working stringSplit', function() {
+    expect.assertions(1);
+    expect(stringSplit('abc', '')).toStrictEqual(['a', 'b', 'c']);
+  });
+
+  it('has working $split', function() {
+    expect.assertions(1);
+    expect($split('abc', '')).toStrictEqual(['a', 'b', 'c']);
+  });
+
+  it('getIterable', function() {
+    expect.assertions(2);
+    expect(getIterable('abc')).toStrictEqual(['a', 'b', 'c']);
+    expect(getIterable(null)).toBeNull();
   });
 
   it('should start from 0 by default and create target', function() {

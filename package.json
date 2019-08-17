@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "has-boxed-string-x": "^2.1.0",
+    "has-working-bind-x": "^1.0.0",
     "is-primitive-x": "^1.0.0",
     "is-string": "^1.0.4"
   },

@@ -54,16 +54,19 @@ This pushes or concatenates into a new or existing array.
 
 This pushes or concatenates into a new or existing array.
 
-**Kind**: Exported member  
+**Kind**: Exported member
 
-| Param       | Type                   | Description            |
-| ----------- | -----------------------| ---------------------- |
-| arrayLike   | <code>ArrayLike</code> | The source.            |
-| [from]      | <code>number</code>    | The from source index. |
-| [target]    | <code>Array</code>     | The target array.      |
+| Param     | Type                   | Description            |
+| --------- | ---------------------- | ---------------------- |
+| arrayLike | <code>ArrayLike</code> | The source.            |
+| [from]    | <code>number</code>    | The from source index. |
+| [target]  | <code>Array</code>     | The target array.      |
 
 **Example**
 
 ```js
 import pusher from 'util-pusher-x';
+
+const x = [1, 2, 3];
+console.log(pusher([4, 5, 6], 1, x)); // [1, 2, 3, 5, 6]
 ```

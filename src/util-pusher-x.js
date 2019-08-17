@@ -1,15 +1,22 @@
 import isPrimitive from 'is-primitive-x';
 import isString from 'is-string';
 import hasBoxed from 'has-boxed-string-x';
+import hasWorkingBind from 'has-working-bind-x';
 
 const EMPTY_STRING = '';
 const {split} = EMPTY_STRING;
-const splitter = [EMPTY_STRING];
 const {max} = Math;
-
-const getIterable = function getIterable(arrayLike) {
+const {bind, call} = isPrimitive;
+export const stringSplit = function stringSplit(string, pattern) {
   // noinspection JSUnresolvedFunction
-  return hasBoxed && isString(arrayLike) ? split.apply(arrayLike, splitter) : arrayLike;
+  return split.call(string, pattern);
+};
+
+export const $split = hasWorkingBind ? bind.call(call, split) : stringSplit;
+
+export const getIterable = function getIterable(arrayLike) {
+  // noinspection JSUnresolvedFunction
+  return isString(arrayLike) ? $split(arrayLike, EMPTY_STRING) : arrayLike;
 };
 
 // eslint-disable jsdoc/no-undefined-types
@@ -31,7 +38,7 @@ const pusher = function pusher(arrayLike, from) {
     return target;
   }
 
-  const iterable = getIterable(arrayLike);
+  const iterable = hasBoxed ? arrayLike : getIterable(arrayLike);
   const {length} = iterable;
   for (let i = max(0, from) || 0; i < length; i += 1) {
     target[target.length] = arrayLike[i];

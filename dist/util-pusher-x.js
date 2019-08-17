@@ -2,11 +2,11 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2019-present",
-  "date": "2019-08-17T17:50:12.490Z",
+  "date": "2019-08-17T20:32:15.526Z",
   "describe": "",
   "description": "A simple pusher/concatenator utility.",
   "file": "util-pusher-x.js",
-  "hash": "83aa5ed10e3ac6b72185",
+  "hash": "652270eae08e9be54eef",
   "license": "MIT",
   "version": "1.0.1"
 }
@@ -222,18 +222,101 @@ var hasBoxed = boxedString[0] === string && 0 in boxedString;
 /* harmony default export */ var has_boxed_string_x_esm = (hasBoxed);
 
 
+// CONCATENATED MODULE: ./node_modules/noop-x/dist/noop-x.esm.js
+/**
+ * This method returns undefined.
+ *
+ * @returns {undefined} Always undefined.
+ */
+var noop = function noop() {};
+/* eslint-disable-line lodash/prefer-noop */
+
+
+/* harmony default export */ var noop_x_esm = (noop);
+
+
+// CONCATENATED MODULE: ./node_modules/has-working-bind-x/dist/has-working-bind-x.esm.js
+
+var bind = noop_x_esm.bind;
+
+var test1 = function test1() {
+  var a1 = null;
+  var a2 = null;
+  var context = null;
+  var testThis = [];
+
+  var test1Fn = function test1Fn(arg1, arg2) {
+    /* eslint-disable-next-line babel/no-invalid-this */
+    context = this;
+    a1 = arg1;
+    a2 = arg2;
+    /* eslint-disable-next-line prefer-rest-params */
+
+    return arguments;
+  };
+
+  try {
+    var boundFn = bind.apply(test1Fn, [testThis, 1]);
+    var args = boundFn(2);
+    return boundFn.length === 1 && args.length === 2 && a1 === 1 && a2 === 2 && context === testThis;
+  } catch (e) {
+    return false;
+  }
+};
+
+var test2 = function test2() {
+  var a1 = null;
+  var a2 = null;
+  var context = null;
+  var oracle = [1, 2, 3];
+
+  var Ctr = function Ctr(arg1, arg2) {
+    a1 = arg1;
+    a2 = arg2;
+    context = this;
+    return oracle;
+  };
+
+  try {
+    var BoundFn = bind.apply(Ctr, [null]);
+    var returned = new BoundFn(1, 2);
+    return BoundFn.length === Ctr.length && returned === oracle && a1 === 1 && a2 === 2 && context !== oracle;
+  } catch (e) {
+    return false;
+  }
+};
+/**
+ * Indicates if the engine has a working bind function.
+ *
+ * @type {boolean}
+ */
+
+
+var isWorking = typeof bind === 'function' && test1() && test2();
+/* harmony default export */ var has_working_bind_x_esm = (isWorking);
+
+
 // CONCATENATED MODULE: ./dist/util-pusher-x.esm.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stringSplit", function() { return stringSplit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "$split", function() { return $split; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIterable", function() { return util_pusher_x_esm_getIterable; });
+
 
 
 
 var EMPTY_STRING = '';
 var split = EMPTY_STRING.split;
-var splitter = [EMPTY_STRING];
 var max = Math.max;
-
+var util_pusher_x_esm_bind = is_primitive_x_esm.bind,
+    call = is_primitive_x_esm.call;
+var stringSplit = function stringSplit(string, pattern) {
+  // noinspection JSUnresolvedFunction
+  return split.call(string, pattern);
+};
+var $split = has_working_bind_x_esm ? util_pusher_x_esm_bind.call(call, split) : stringSplit;
 var util_pusher_x_esm_getIterable = function getIterable(arrayLike) {
   // noinspection JSUnresolvedFunction
-  return has_boxed_string_x_esm && is_string_default()(arrayLike) ? split.apply(arrayLike, splitter) : arrayLike;
+  return is_string_default()(arrayLike) ? $split(arrayLike, EMPTY_STRING) : arrayLike;
 }; // eslint-disable jsdoc/no-undefined-types
 // noinspection JSCommentMatchesSignature
 
@@ -247,7 +330,6 @@ var util_pusher_x_esm_getIterable = function getIterable(arrayLike) {
  */
 // eslint-enable jsdoc/no-undefined-types
 
-
 var util_pusher_x_esm_pusher = function pusher(arrayLike, from) {
   /* eslint-disable-next-line prefer-rest-params */
   var target = arguments.length > 2 ? arguments[2] : [];
@@ -256,7 +338,7 @@ var util_pusher_x_esm_pusher = function pusher(arrayLike, from) {
     return target;
   }
 
-  var iterable = util_pusher_x_esm_getIterable(arrayLike);
+  var iterable = has_boxed_string_x_esm ? arrayLike : util_pusher_x_esm_getIterable(arrayLike);
   var length = iterable.length;
 
   for (var i = max(0, from) || 0; i < length; i += 1) {

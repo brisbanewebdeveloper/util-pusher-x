@@ -1,14 +1,20 @@
 import isPrimitive from 'is-primitive-x';
 import isString from 'is-string';
 import hasBoxed from 'has-boxed-string-x';
+import hasWorkingBind from 'has-working-bind-x';
 var EMPTY_STRING = '';
 var split = EMPTY_STRING.split;
-var splitter = [EMPTY_STRING];
 var max = Math.max;
-
-var getIterable = function getIterable(arrayLike) {
+var bind = isPrimitive.bind,
+    call = isPrimitive.call;
+export var stringSplit = function stringSplit(string, pattern) {
   // noinspection JSUnresolvedFunction
-  return hasBoxed && isString(arrayLike) ? split.apply(arrayLike, splitter) : arrayLike;
+  return split.call(string, pattern);
+};
+export var $split = hasWorkingBind ? bind.call(call, split) : stringSplit;
+export var getIterable = function getIterable(arrayLike) {
+  // noinspection JSUnresolvedFunction
+  return isString(arrayLike) ? $split(arrayLike, EMPTY_STRING) : arrayLike;
 }; // eslint-disable jsdoc/no-undefined-types
 // noinspection JSCommentMatchesSignature
 
@@ -22,7 +28,6 @@ var getIterable = function getIterable(arrayLike) {
  */
 // eslint-enable jsdoc/no-undefined-types
 
-
 var pusher = function pusher(arrayLike, from) {
   /* eslint-disable-next-line prefer-rest-params */
   var target = arguments.length > 2 ? arguments[2] : [];
@@ -31,7 +36,7 @@ var pusher = function pusher(arrayLike, from) {
     return target;
   }
 
-  var iterable = getIterable(arrayLike);
+  var iterable = hasBoxed ? arrayLike : getIterable(arrayLike);
   var length = iterable.length;
 
   for (var i = max(0, from) || 0; i < length; i += 1) {
