@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2019-present",
-  "date": "2019-08-20T12:31:38.539Z",
+  "date": "2019-08-20T18:56:40.754Z",
   "describe": "",
   "description": "A simple pusher/concatenator utility.",
   "file": "util-pusher-x.js",
   "hash": "652270eae08e9be54eef",
   "license": "MIT",
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
