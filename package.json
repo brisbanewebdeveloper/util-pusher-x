@@ -1,6 +1,6 @@
 {
   "name": "util-pusher-x",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple pusher/concatenator utility.",
   "homepage": "https://github.com/Xotic750/util-pusher-x",
   "author": {
@@ -52,9 +52,9 @@
     "url": "https://github.com/Xotic750/util-pusher-x/issues"
   },
   "dependencies": {
-    "has-boxed-string-x": "^2.1.0",
-    "has-working-bind-x": "^1.0.0",
-    "is-primitive-x": "^1.0.0",
+    "has-boxed-string-x": "^2.1.1",
+    "has-working-bind-x": "^1.0.1",
+    "is-primitive-x": "^1.0.1",
     "is-string": "^1.0.4"
   },
   "devDependencies": {
