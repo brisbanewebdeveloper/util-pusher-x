@@ -2,7 +2,7 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2019-present",
-  "date": "2019-08-30T21:15:52.953Z",
+  "date": "2019-09-04T22:21:46.421Z",
   "describe": "",
   "description": "A simple pusher/concatenator utility.",
   "file": "util-pusher-x.js",
